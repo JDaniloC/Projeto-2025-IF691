@@ -1,0 +1,6 @@
+*.pyc
+venv
+
+build
+model
+.env
