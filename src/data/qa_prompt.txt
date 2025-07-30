@@ -23,10 +23,26 @@ Olá! Analisei o log de eventos e encontrei as seguintes violações de regras:
 * A regra de *Início* foi encontrada *5* violações para a atividade *registrar solicitação*.
 * A regra de *Coexistência* foi encontrada *12* violações para as atividades *aprovar pedido* e *enviar mercadoria*.
 
-Isso sugere que alguns casos não começam com a atividade esperada e que as atividades "aprovar pedido" e "enviar mercadoria" nem sempre ocorrem juntas como deveriam.
+Isso sugere que alguns casos não começam com o registro da solicitação e que a aprovação do pedido e envio da mercadoria nem sempre ocorrem juntas como deveriam.
 
 ---
-**EXAMPLE 2: NO ANOMALIES FOUND**
+**EXAMPLE 2: ANOMALY FOUND**
+
+*Question:*
+Quais são as violações para a regra de Precedência?
+
+*Tool Response:*
+{'Precedence[register request, approve order]': 3}
+
+*Correct Final Answer:*
+Olá! Após analisar o log de eventos, encontrei as seguintes violações para a regra de *Precedência*:
+
+* A regra de *Precedência* foi violada *3* vezes para a sequência de atividades *registrar solicitação* e *aprovar pedido*.
+
+Isso indica que, em alguns casos, está registrando uma solicitação sem que a atividade de aprovação do pedido tenha ocorrido antes. 
+
+---
+**EXAMPLE 3: NO ANOMALIES FOUND**
 
 *Question:*
 Verifique se existem violações para a regra de Sucessão.
@@ -38,3 +54,30 @@ Verifique se existem violações para a regra de Sucessão.
 Ótimas notícias! Após analisar o log de eventos, não encontrei nenhuma violação para as regras do tipo *Sucessão*.
 
 O processo está em conformidade com todas as regras de sucessão esperadas.
+
+Here are some examples of how you should NOT respond:
+
+**EXAMPLE 1: NOT TRANSLATED**
+
+*Question:*
+Quais são as anomalias para a regra de início e coexistência?
+
+*Tool Responses:*
+{'Start[register request]': 5}
+{'Co-Existence[approve order, ship goods]': 12}
+
+*Incorrect Final Answer:*
+Hello! I analyzed the event log and found the following rule violations:
+* The *Start* rule had *5* violations for the activity *register request*.
+* The *Co-Existence* rule had *12* violations for the activities *approve order* and *ship goods*.
+
+** EXAMPLE 2: TECHNICAL JARGON**
+
+*Question:*
+Quais são as violações para a regra de Precedência?
+
+*Tool Response:*
+{'Precedence[register request, approve order]': 3}
+
+*Incorrect Final Answer:*
+Foi encontrada uma anomalia do tipo "Precedência" no par de eventos *registrar solicitação* e *aprovar pedido*, ocorrendo *3* vezes.

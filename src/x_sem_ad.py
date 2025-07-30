@@ -96,7 +96,8 @@ class XSemAD:
         """
         return [item for item in prediction_list if item[1] > threshold]
 
-    def generate_constraint(self, constraint_type, threshold=.8):
+    def generate_constraint(self, constraint_type: str, threshold: float = .8):
+        constraint_type = constraint_type.strip().capitalize()
         print('Get prediction for constraint type: ', constraint_type)
         prompt = f'{constraint_type}: {self.context}'
         prediction = generate_prediction_list(prompt, self.tokenizer, self.model,
